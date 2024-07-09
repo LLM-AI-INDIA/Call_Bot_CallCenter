@@ -18,7 +18,7 @@ imcol1, imcol2, imcol3, imcol4 = st.columns((3.5,3,2.5,3.8))
 
 with imcol2:
     st.write("## ")
-    st.image('image\llmatscale-logo.png')
+    st.image('image/llmatscale-logo.png')
 with imcol3:
     st.image('image/Call Center AI logo (1).png')   
 
@@ -30,7 +30,6 @@ st.markdown("<hr style=height:2.5px;margin-top:0px;width:100%;background-color:g
 with st.sidebar:
     st.markdown("<p style='text-align: center; color: white; font-size:25px;'><span style='font-weight: bold; font-family: century-gothic';></span>Solutions Scope</p>", unsafe_allow_html=True)
     vAR_AI_application = st.selectbox("",['Select Application','Conversational Interaction','Document-based Interaction','Transaction-based Interaction'],key='application')
-    # selected = st.selectbox("",['User',"Logout"],key='text')
     vAR_LLM_model = st.selectbox("",['LLM Models',"gpt-3.5-turbo-16k-0613","gpt-4-0314","gpt-3.5-turbo-16k","gpt-3.5-turbo-1106","gpt-4-0613","gpt-4-0314"],key='text_llmmodel')
     vAR_LLM_framework = st.selectbox("",['LLM Framework',"Langchain"],key='text_framework')
 
