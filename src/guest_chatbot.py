@@ -14,7 +14,7 @@ def guest_bot(thread_id):
             client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
             thread = client.beta.threads.create()
             message = client.beta.threads.messages.create(thread_id=thread_id,role="user",content=user_input)
-            run = client.beta.threads.runs.create(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CHATBOT_CONVERSATIONAL"])
+            run = client.beta.threads.runs.create_and_poll(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CHATBOT_CONVERSATIONAL"])
             # run = client.beta.threads.runs.create(thread_id=thread.id,assistant_id=assistant.id,run_id=run.id)
             
             while True:

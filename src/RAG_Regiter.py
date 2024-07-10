@@ -32,7 +32,7 @@ def RAG_register_bot(email,username,thread_id):
                 if user_input == f'My Name:{username} and Email id:{email}':
                     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
                     message_1 = client.beta.threads.messages.create(thread_id=thread_id,role="user",content=user_input)
-                    run = client.beta.threads.runs.create(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_DOCUMENT"])
+                    run = client.beta.threads.runs.create_and_poll(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_DOCUMENT"])
                     # run = client.beta.threads.runs.create(thread_id=thread.id,assistant_id=assistant.id,run_id=run.id)
                     
                     while True:
@@ -46,7 +46,7 @@ def RAG_register_bot(email,username,thread_id):
                 def conversation(user_input,thread_id):
                     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
                     message_1 = client.beta.threads.messages.create(thread_id=thread_id,role="user",content=user_input)
-                    run = client.beta.threads.runs.create(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_DOCUMENT"])
+                    run = client.beta.threads.runs.create_and_poll(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_DOCUMENT"])
                     # run = client.beta.threads.runs.create(thread_id=thread.id,assistant_id=assistant.id,run_id=run.id)
                     
                     while True:
@@ -117,7 +117,7 @@ def RAG_register_bot(email,username,thread_id):
                 if user_input == f'My Name:{username} and Email id:{email}':
                     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
                     message_1 = client.beta.threads.messages.create(thread_id=thread_id,role="user",content=user_input)
-                    run = client.beta.threads.runs.create(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_DOCUMENT"])
+                    run = client.beta.threads.runs.create_and_poll(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_DOCUMENT"])
                     # run = client.beta.threads.runs.create(thread_id=thread.id,assistant_id=assistant.id,run_id=run.id)
                     
                     while True:
@@ -131,7 +131,7 @@ def RAG_register_bot(email,username,thread_id):
                 def conversation(user_input,thread_id):
                     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
                     message_1 = client.beta.threads.messages.create(thread_id=thread_id,role="user",content=user_input)
-                    run = client.beta.threads.runs.create(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_DOCUMENT"])
+                    run = client.beta.threads.runs.create_and_poll(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_DOCUMENT"])
                     # run = client.beta.threads.runs.create(thread_id=thread.id,assistant_id=assistant.id,run_id=run.id)
                     
                     while True:

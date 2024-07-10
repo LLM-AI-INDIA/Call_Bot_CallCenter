@@ -55,7 +55,7 @@ def Transaction_gusest_bot(thread_id):
         # text = get_pdf_text(vAR_file)
         client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
         message_1 = client.beta.threads.messages.create(thread_id=thread_id,role="user",content=str(column_data))
-        run = client.beta.threads.runs.create(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_TRANSACTION_GUEST"])
+        run = client.beta.threads.runs.create_and_poll(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_TRANSACTION_GUEST"])
         # run = client.beta.threads.runs.create(thread_id=thread.id,assistant_id=assistant.id,run_id=run.id)
         
         while True:
@@ -77,7 +77,7 @@ def Transaction_gusest_bot(thread_id):
             client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
             thread = client.beta.threads.create()
             message = client.beta.threads.messages.create(thread_id=thread_id,role="user",content=user_input)
-            run = client.beta.threads.runs.create(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_TRANSACTION_GUEST"])
+            run = client.beta.threads.runs.create_and_poll(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_TRANSACTION_GUEST"])
             # run = client.beta.threads.runs.create(thread_id=thread.id,assistant_id=assistant.id,run_id=run.id)
             
             while True:

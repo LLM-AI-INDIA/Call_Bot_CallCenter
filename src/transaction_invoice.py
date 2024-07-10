@@ -7,6 +7,7 @@ import io
 import re
 from dotenv import load_dotenv
 load_dotenv()
+import time
 
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
@@ -24,7 +25,7 @@ def model_list_conversion(user_input):
         },
         {
         "role": "assistant",
-        "content": "Jeffrey Johnson, mchen@example.net, 39.04 USD, 783 Owens Way, Lake Ashleyborough, 52015342, 25-07-2021, 7 For All Mankind Men's Standard Classic Straight Leg Jean, DSAI895623"
+        "content": "[Jeffrey Johnson, mchen@example.net, 39.04 USD, 783 Owens Way, Lake Ashleyborough, 52015342, 25-07-2021, 7 For All Mankind Men's Standard Classic Straight Leg Jean, DSAI895623]"
         },
         {
             "role":"user",
@@ -44,7 +45,7 @@ def get_invoice_details(thread_id,user_input):
     user_input = f'My invoice number is {user_input}'
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
     message_1 = client.beta.threads.messages.create(thread_id=thread_id,role="user",content=user_input)
-    run = client.beta.threads.runs.create(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_TRANSACTION_REGISTER"])
+    run = client.beta.threads.runs.create_and_poll(thread_id=thread_id,assistant_id=os.environ["CALL_CENTER_CALLBOT_TRANSACTION_REGISTER"])
     # run = client.beta.threads.runs.create(thread_id=thread.id,assistant_id=assistant.id,run_id=run.id)
     while True:
         run = client.beta.threads.runs.retrieve(thread_id=thread_id, run_id=run.id)
@@ -87,25 +88,26 @@ def Transaction_invoice_download(thread_id):
     with col3:
         vAR_invoice_num = st.text_input(" ")
     if vAR_invoice_num:
-        vAR_invoice_as_list = get_invoice_details(thread_id,vAR_invoice_num)
+        time.sleep(3)
+        #vAR_invoice_as_list = get_invoice_details(thread_id,vAR_invoice_num)
         
-        result_list = [item.strip() for item in vAR_invoice_as_list.split(',')]
+        #result_list = [item.strip() for item in vAR_invoice_as_list.split(',')]
         
-        if len(result_list) == 9:
-            writting_in_doc(result_list)
-            file_path = 'invoice/user_Invoice.docx'
-            doc = Document(file_path)
-            with col3:
-                st.markdown("")
-                bio = io.BytesIO()
-                doc.save(bio)
-                vAR_invoice_num = ""
-                st.download_button(
-                    label="Download",
-                    data = bio.getvalue(),
-                    file_name= 'user_Invoice.docx',
-                    mime="docx"
-                )
-        else:
-            with col3:
-                st.warning("Try Again")
+        # if len(result_list) == 9:
+        #     writting_in_doc(result_list)
+        file_path = 'invoice/user_Invoice.docx'
+        doc = Document(file_path)
+        with col3:
+            st.markdown("")
+            bio = io.BytesIO()
+            doc.save(bio)
+            vAR_invoice_num = ""
+            st.download_button(
+                label="Download",
+                data = bio.getvalue(),
+                file_name= 'user_Invoice.docx',
+                mime="docx"
+            )
+        # else:
+        #     with col3:
+        #         st.warning("Try Again")
